@@ -1,0 +1,36 @@
+//PBEGFNL  JOB 1,NOTIFY=&SYSUID,TIME=MAXIMUM
+//COBRUN   EXEC IGYWCL
+//COBOL.SYSIN  DD DSN=&SYSUID..CBL(PBEGIDX),DISP=SHR
+//LKED.SYSLMOD DD DSN=&SYSUID..LOAD(PBEGIDX),DISP=SHR
+//***************************************************/
+// IF RC < 5 THEN
+//***************************************************/
+//COBRUN   EXEC IGYWCL
+//COBOL.SYSIN  DD DSN=&SYSUID..CBL(PBEGFNL),DISP=SHR
+//LKED.SYSLMOD DD DSN=&SYSUID..LOAD(PBEGFNL),DISP=SHR
+//LKED.SYSLIB  DD DSN=&SYSUID..LOAD(PBEGIDX),DISP=SHR
+//***************************************************/
+// IF RC < 5 THEN
+//***************************************************/
+//DELET100 EXEC PGM=IDCAMS
+//SYSPRINT DD SYSOUT=*
+//SYSIN    DD *
+  DELETE Z95642.QSAM.OUTLINE NONVSAM
+  IF LASTCC LE 08 THEN SET MAXCC = 00
+/*
+//RUN      EXEC PGM=PBEGFNL
+//STEPLIB   DD DSN=&SYSUID..LOAD,DISP=SHR
+//ACCTREC   DD DSN=&SYSUID..VSAM.AA,DISP=SHR
+//INPFILE   DD DSN=&SYSUID..QSAM.INP,DISP=SHR
+//OUTFILE   DD DSN=&SYSUID..QSAM.OUTLINE,
+//            DISP=(NEW,CATLG,CATLG),
+//            SPACE=(TRK,(5,5),RLSE),
+//            DCB=(RECFM=FB,LRECL=41,BLKSIZE=0)
+//SYSOUT    DD SYSOUT=*,OUTLIM=1000
+//CEEDUMP   DD DUMMY
+//SYSUDUMP  DD DUMMY
+//***************************************************/
+// ELSE
+// ENDIF
+// ELSE
+// ENDIF
